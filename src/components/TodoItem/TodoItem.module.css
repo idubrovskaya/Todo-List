@@ -1,0 +1,50 @@
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  font-size: 20px;
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 118, 20, 1) 0%,
+    rgba(255, 84, 17, 1) 100%
+  );
+
+  padding: 16px;
+  border-radius: 5px;
+  width: 92%;
+}
+
+.todoItem:nth-child(4n + 1) {
+  background: linear-gradient(
+    90deg,
+    rgb(54, 158, 22) 0%,
+    rgb(121, 236, 86) 100%
+  );
+}
+
+.todoItem:nth-child(4n + 2) {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 12, 241, 1) 0%,
+    rgba(250, 0, 135, 1) 100%
+  );
+}
+
+.todoItem:nth-child(4n + 3) {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 159, 255, 1) 0%,
+    rgba(17, 122, 255, 1) 100%
+  );
+}
+
+.completedTodo {
+  text-decoration: line-through;
+  color: #fff;
+}
+
+.uncompletedTodo {
+  color: #fff;
+}
