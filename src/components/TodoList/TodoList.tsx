@@ -1,53 +1,28 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '../Form/Form';
 import { TodoItem } from '../TodoItem/TodoItem';
-
-interface ITodoItem {
-  id: string;
-  text: string;
-  completed: boolean;
-  time: string;
-}
+import { ITodoState } from '../../redux/reducers/todoReducer';
 
 export const TodoList = () => {
-  const [todoItem, setTodoItem] = useState<string>('');
-
-  const [todos, setTodos] = useState<ITodoItem[]>([]);
+  const state = useSelector((state: ITodoState) => state);
+  const todos = state.todos;
+  const dispatch = useDispatch();
 
   const onClickComplete = (id: string) => {
-    setTodos([
-      ...todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : { ...todo }
-      ),
-    ]);
+    dispatch({ type: 'COMPLETED_TODO', id: id });
   };
+
   const onClickDelete = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch({ type: 'DELETE_TODO', id: id });
   };
 
-  const addNewTodo = () => {
-    const date = new Date();
-
-    const newTodo = {
-      id: Math.random().toString().substring(3),
-      text: todoItem,
-      completed: false,
-      time: ` Was created: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`,
-    };
-    if (newTodo.text === '') {
-      return;
-    }
-    setTodos([...todos, newTodo]);
-    setTodoItem('');
+  const addNewTodo = (text: string) => {
+    return text !== '' ? dispatch({ type: 'ADD_TODO', text: text }) : null;
   };
 
   return (
     <div>
-      <Form
-        todoItem={todoItem}
-        setTodoItem={setTodoItem}
-        addNewTodo={addNewTodo}
-      />
+      <Form addNewTodo={addNewTodo} />
       {todos.map((item) => {
         return (
           <TodoItem

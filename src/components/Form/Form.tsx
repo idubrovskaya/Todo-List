@@ -1,14 +1,20 @@
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import styles from './Form.module.css';
+import { useState } from 'react';
 
 interface IProps {
-  todoItem: string;
-  setTodoItem: (text: string) => void;
-  addNewTodo: () => void;
+  addNewTodo: (todoItem: string) => void;
 }
 
-export const Form = ({ todoItem, setTodoItem, addNewTodo }: IProps) => {
+export const Form = ({ addNewTodo }: IProps) => {
+  const [todoItem, setTodoItem] = useState<string>('');
+
+  const handleAddNewTodo = () => {
+    addNewTodo(todoItem.trim());
+    setTodoItem('');
+  };
+
   return (
     <div className={styles.form}>
       <Input
@@ -17,7 +23,7 @@ export const Form = ({ todoItem, setTodoItem, addNewTodo }: IProps) => {
           setTodoItem(event.target.value);
         }}
       />
-      <Button text='Add' onClick={addNewTodo} />
+      <Button text='Add' onClick={handleAddNewTodo} />
     </div>
   );
 };
