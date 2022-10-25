@@ -25,6 +25,13 @@ export const TodoList = () => {
     return text !== '' ? dispatch(addTodo(text)) : null;
   };
 
+  const finishedTodos = todos.reduce((prev, cur) => {
+    if (cur.completed) {
+      return prev + 1;
+    }
+    return prev;
+  }, 0);
+
   return (
     <div>
       <Form addNewTodo={addNewTodo} />
@@ -44,13 +51,7 @@ export const TodoList = () => {
         Number of tasks: {todos.length}
       </p>
       <p style={{ color: 'white', margin: '10px  10px 0' }}>
-        FInished:{' '}
-        {todos.reduce((prev, cur) => {
-          if (cur.completed) {
-            return prev + 1;
-          }
-          return prev;
-        }, 0)}
+        Finished: {finishedTodos}
       </p>
     </div>
   );

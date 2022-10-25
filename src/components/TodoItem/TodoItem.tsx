@@ -28,10 +28,12 @@ export const TodoItem = ({
   return (
     <div className={styles.todoItem}>
       <Button text='&#10003;' onClick={onComplete} />
-      <p className={checked} onClick={toggleShowTime}>
-        {text}
-      </p>
-      {showTime ? <p> {time}</p> : null}
+      <div>
+        <p className={checked} onClick={toggleShowTime}>
+          {text}
+        </p>
+        {showTime ? <p> {time}</p> : null}
+      </div>
       <Button text='&#9747;' onClick={onDelete} />
     </div>
   );
