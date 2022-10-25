@@ -2,6 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '../Form/Form';
 import { TodoItem } from '../TodoItem/TodoItem';
 import { ITodoState } from '../../redux/reducers/todoReducer';
+import {
+  addTodo,
+  completedTodo,
+  deleteTodo,
+} from '../../redux/actions/todosActions';
 
 export const TodoList = () => {
   const state = useSelector((state: ITodoState) => state);
@@ -9,15 +14,15 @@ export const TodoList = () => {
   const dispatch = useDispatch();
 
   const onClickComplete = (id: string) => {
-    dispatch({ type: 'COMPLETED_TODO', id: id });
+    dispatch(completedTodo(id));
   };
 
   const onClickDelete = (id: string) => {
-    dispatch({ type: 'DELETE_TODO', id: id });
+    dispatch(deleteTodo(id));
   };
 
   const addNewTodo = (text: string) => {
-    return text !== '' ? dispatch({ type: 'ADD_TODO', text: text }) : null;
+    return text !== '' ? dispatch(addTodo(text)) : null;
   };
 
   return (

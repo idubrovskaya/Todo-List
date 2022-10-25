@@ -1,3 +1,4 @@
+import { ACTIONS } from '../constants';
 export interface ITodoItem {
   id: string;
   text: string;
@@ -14,7 +15,7 @@ const defaultState: ITodoState = {
 };
 
 export const todoReducer = (state = defaultState, action: any) => {
-  if (action.type === 'ADD_TODO') {
+  if (action.type === ACTIONS.ADD_TODO) {
     const date = new Date();
     const newTodo = {
       id: 'id' + Math.random().toString().substring(3),
@@ -29,13 +30,13 @@ export const todoReducer = (state = defaultState, action: any) => {
     };
   }
 
-  if (action.type === 'DELETE_TODO') {
+  if (action.type === ACTIONS.DELETE) {
     const newTodos = state.todos.filter((todo) => todo.id !== action.id);
     return {
       todos: newTodos,
     };
   }
-  if (action.type === 'COMPLETED_TODO') {
+  if (action.type === ACTIONS.COMPLETED) {
     const newTodos = state.todos.map((todo) => {
       if (todo.id === action.id) {
         return { ...todo, completed: !todo.completed };
